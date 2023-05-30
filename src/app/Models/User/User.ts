@@ -1,16 +1,17 @@
 export class User{
-    id: number;
-    username:string;
-    password:string;
-    document:string;
-    userImage:string;
-    Email:string;
-    Deleted:boolean;
-    DeletedDate: Date;
-    UserDeletedId:number;
-    CreationDate: Date;
-    UserCreationId:number;
-    ModifiedDate: Date;
-    UserModifiedId:number;
-    Name:string;
+    username?:string;
+    password?:string;
+    document?:string;
+    userImage?:string;
+    email?:string;
+    deleted?:boolean;
+    deletedDate?: Date;
+    userDeletedId?:number;
+    creationDate?: Date;
+    userCreationId?:number;
+    modifiedDate?: Date;
+    userModifiedId?:number;
+    name?:string;
+
+    constructor(){};
 }
