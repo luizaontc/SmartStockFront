@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { User } from 'src/app/Models/User/User';
 import { UserService } from 'src/app/Services/User/user.service';
 
@@ -13,12 +14,18 @@ export class UserComponent implements OnInit{
   
   form: any;
   formTitle: string = "";
-  users?: User[];
+  users: User[] = [];
+  nameUser: string = "";
+  userId: number = 0
 
   visibilityTable: boolean=true;
   visibilityForm: boolean=false;
 
-  constructor(private userService : UserService){}
+  modalRef : BsModalRef | undefined;
+
+  constructor( private userService : UserService,
+               private modalService: BsModalService){
+  }
 
   ngOnInit(): void {
 
@@ -30,7 +37,20 @@ export class UserComponent implements OnInit{
   SendForm(): void{
     const user: User = this.form.value;
 
-    this.userService.NewUser(user).subscribe((result) => 
+    console.log(user.id);
+
+    if(user.id > 0){
+      this.userService.UpdateUser(user).subscribe((result) => 
+      {
+        this.visibilityForm = false;
+        this.visibilityTable = true; 
+        alert('Usuário atualizado com sucesso');
+        this.userService.GetAllUsers().subscribe((result2)=>{
+          this.users = result2
+        })
+      });
+    }else{
+      this.userService.NewUser(user).subscribe((result) => 
       {
         this.visibilityForm = false;
         this.visibilityTable = true; 
@@ -39,7 +59,51 @@ export class UserComponent implements OnInit{
           this.users = result2
         })
       });
+    }
   }
+
+  GetAll(): void{
+    this.userService.GetAllUsers().subscribe((result) =>{
+      this.users = result
+    });
+  };
+
+  UpdateUser(id:number): void{
+    this.visibilityTable = false;
+    this.visibilityForm = true;
+
+    console.log(id);
+
+    this.userService.GetUserById(id).subscribe((result) => {
+      this.formTitle = `Atualizar  `;
+
+    console.log(result);
+
+
+      this.form = new FormGroup({
+        id: new FormControl(result.id),
+        username: new FormControl(result.username),
+        password: new FormControl(result.password),
+        document: new FormControl(result.document),
+        email: new FormControl(result.email),
+        name: new FormControl(result.name),
+        creationDate: new FormControl(result.creationDate),
+        userCreationId: new FormControl(result.userCreationId),
+    });
+  });
+}
+
+DeleteUser(id:number): void{
+  this.userService.DeleteUser(id).subscribe((result) => 
+  {
+    this.modalRef?.hide();
+    alert('Usuário deletado com sucesso');
+        this.userService.GetAllUsers().subscribe((result2)=>{
+          this.users = result2
+        })
+
+  });
+};
 
   ShowUserForm(): void{
     this.visibilityTable = false;
@@ -54,6 +118,12 @@ export class UserComponent implements OnInit{
       name: new FormControl(null)
     });
   }
+
+  ShowModal(id:number, name:string,conteudoModal: TemplateRef<any>):void{
+    this.modalRef = this.modalService.show(conteudoModal);
+    this.userId = id;
+    this.nameUser = name
+}
 
   Back():void{
     this.visibilityTable = true;

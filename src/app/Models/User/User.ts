@@ -1,5 +1,6 @@
 export class User{
-    username?:string;
+    id:number;
+    username:string;
     password?:string;
     document?:string;
     userImage?:string;
@@ -11,7 +12,19 @@ export class User{
     userCreationId?:number;
     modifiedDate?: Date;
     userModifiedId?:number;
-    name?:string;
+    name:string;
 
-    constructor(){};
+    constructor(id : number, 
+                username:string,
+                password:string,
+                document:string,
+                email:string,
+                name:string){
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.document = document;
+        this.email = email;
+        this.name = name;
+    };
 }
