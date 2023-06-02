@@ -44,4 +44,8 @@ export class UserService {
 
       return this.http.delete<number>(apiUrl, httpOptions);
     } 
+
+    authenticate(data:any){
+      return this.http.post(this.url + '/authenticate',data);
+    }
 }

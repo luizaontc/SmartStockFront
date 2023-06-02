@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { User } from 'src/app/Models/User/User';
 import { UserService } from 'src/app/Services/User/user.service';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user',
@@ -13,10 +13,14 @@ import { UserService } from 'src/app/Services/User/user.service';
 export class UserComponent implements OnInit{
   
   form: any;
+  formLogin: any;
   formTitle: string = "";
   users: User[] = [];
+  userLogin: any = 0;
   nameUser: string = "";
-  userId: number = 0
+  userId: number = 0;
+  isAuthenticated: boolean = false;
+  userLogged: any = {};
 
   visibilityTable: boolean=true;
   visibilityForm: boolean=false;
@@ -28,10 +32,11 @@ export class UserComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
-    this.userService.GetAllUsers().subscribe(result => {
-      this.users = result
-    })
+    this.formLogin = new FormGroup({
+      username: new FormControl(null),
+      password: new FormControl(null),
+    });
+    
   }
 
   SendForm(): void{
@@ -129,4 +134,32 @@ DeleteUser(id:number): void{
     this.visibilityTable = true;
     this.visibilityForm = false;
   }
+
+  authenticate(){
+    const username = this.formLogin.get('username').value;
+    const password = this.formLogin.get('password').value;
+
+    this.userLogin = {Username: username, Password: password}
+
+    this.userService.authenticate(this.userLogin).subscribe((data:any) => {
+      if (data.user){
+        localStorage.setItem('user_logged',JSON.stringify(data));
+        this.userService.GetAllUsers().subscribe(result => {
+          this.users = result
+        });
+        this.getUserData();
+      }else{
+        alert('Usuário inválido.')
+      }
+    }, error => {
+      console.log(error);
+      alert(error.errox);
+    })
+  }
+
+  getUserData() {
+  this.userLogged = JSON.parse(localStorage.getItem('user_logged') || 'null');
+  this.isAuthenticated = this.userLogged !== null;
+  }
+
 }
