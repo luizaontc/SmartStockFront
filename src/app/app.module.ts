@@ -8,11 +8,13 @@ import { UserService } from './Services/User/user.service';
 import { ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { UserComponent } from './components/user/user.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,7 @@ import { UserComponent } from './components/user/user.component';
     HttpClientModule,
     ModalModule.forRoot()
   ],
-  providers: [HttpClientModule,UserService],
+  providers: [HttpClientModule,UserService,AppRoutingModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

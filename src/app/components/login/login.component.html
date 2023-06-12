@@ -1,0 +1,44 @@
+<div class="containerr">
+    <div class="card-login">
+        <form [formGroup]="formLogin" (ngSubmit)="authenticate()">
+            <div class="text-field form-group">
+                <label>Login:</label>
+                <input type="text" class="form-control form-control-sm" formControlName="username">
+            </div>
+            <div class="text-field form-group">
+                <label>Senha:</label>
+                <input type="password" class="form-control form-control-sm" formControlName="password">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="pl-1">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary btn-login"> Login</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- <div *ngIf="!isAuthenticated" class="containerr">
+    <div class="card-login">
+    <form [formGroup]="formLogin" (ngSubmit)="authenticate()">
+        <h1>LOGIN</h1>
+        <div class="text-field form-group">
+            <label>Login:</label>
+            <input type="text" class="form-control form-control-sm" formControlName="username">
+        </div>
+        <div class="text-field form-group">
+            <label>Senha:</label>
+            <input type="password" class="form-control form-control-sm" formControlName="password">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="pl-1">
+                    <button type="submit" class="btn btn-sm btn-outline-secondary"> Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div> -->

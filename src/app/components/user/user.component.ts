@@ -135,27 +135,27 @@ DeleteUser(id:number): void{
     this.visibilityForm = false;
   }
 
-  authenticate(){
-    const username = this.formLogin.get('username').value;
-    const password = this.formLogin.get('password').value;
+  // authenticate(){
+  //   const username = this.formLogin.get('username').value;
+  //   const password = this.formLogin.get('password').value;
 
-    this.userLogin = {Username: username, Password: password}
+  //   this.userLogin = {Username: username, Password: password}
 
-    this.userService.authenticate(this.userLogin).subscribe((data:any) => {
-      if (data.user){
-        localStorage.setItem('user_logged',JSON.stringify(data));
-        this.userService.GetAllUsers().subscribe(result => {
-          this.users = result
-        });
-        this.getUserData();
-      }else{
-        alert('Usuário inválido.')
-      }
-    }, error => {
-      console.log(error);
-      alert(error.errox);
-    })
-  }
+  //   this.userService.authenticate(this.userLogin).subscribe((data:any) => {
+  //     if (data.user){
+  //       localStorage.setItem('user_logged',JSON.stringify(data));
+  //       this.userService.GetAllUsers().subscribe(result => {
+  //         this.users = result
+  //       });
+  //       this.getUserData();
+  //     }else{
+  //       alert('Usuário inválido.')
+  //     }
+  //   }, error => {
+  //     console.log(error);
+  //     alert(error.errox);
+  //   })
+  // }
 
   getUserData() {
   this.userLogged = JSON.parse(localStorage.getItem('user_logged') || 'null');
