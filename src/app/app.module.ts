@@ -9,6 +9,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { ModalModule } from "ngx-bootstrap/modal";
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
+import { httpInterceptorProviders } from './http-interceptors';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     ModalModule.forRoot()
   ],
-  providers: [HttpClientModule,UserService,AppRoutingModule],
+  providers: [HttpClientModule,UserService,AppRoutingModule,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

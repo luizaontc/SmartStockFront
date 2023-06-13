@@ -8,72 +8,79 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  styleUrls: ['./user.component.css'],
 })
-export class UserComponent implements OnInit{
-  
+export class UserComponent implements OnInit {
   form: any;
   formLogin: any;
-  formTitle: string = "";
+  formTitle: string = '';
   users: User[] = [];
   userLogin: any = 0;
-  nameUser: string = "";
+  nameUser: string = '';
   userId: number = 0;
   isAuthenticated: boolean = false;
   userLogged: any = {};
 
-  visibilityTable: boolean=true;
-  visibilityForm: boolean=false;
+  visibilityTable: boolean = true;
+  visibilityForm: boolean = false;
 
-  modalRef : BsModalRef | undefined;
+  modalRef: BsModalRef | undefined;
 
-  constructor( private userService : UserService,
-               private modalService: BsModalService){
-  }
+  constructor(
+    private userService: UserService,
+    private modalService: BsModalService
+  ) {}
 
   ngOnInit(): void {
     this.formLogin = new FormGroup({
       username: new FormControl(null),
       password: new FormControl(null),
     });
-    
+
+    const jsonString = localStorage.getItem('user_logged');
+
+    if (jsonString) {
+      const userData = JSON.parse(jsonString);
+
+      console.log(userData.user.name);
+      console.log(userData.user.username); 
+      console.log(userData.token); 
+    }
   }
 
-  SendForm(): void{
+  SendForm(): void {
     const user: User = this.form.value;
 
     console.log(user.id);
 
-    if(user.id > 0){
-      this.userService.UpdateUser(user).subscribe((result) => 
-      {
+    if (user.id > 0) {
+      this.userService.UpdateUser(user).subscribe((result) => {
         this.visibilityForm = false;
-        this.visibilityTable = true; 
+        this.visibilityTable = true;
         alert('Usuário atualizado com sucesso');
-        this.userService.GetAllUsers().subscribe((result2)=>{
-          this.users = result2
-        })
+        this.userService.GetAllUsers().subscribe((result2) => {
+          this.users = result2;
+        });
       });
-    }else{
-      this.userService.NewUser(user).subscribe((result) => 
-      {
+    } else {
+      this.userService.NewUser(user).subscribe((result) => {
         this.visibilityForm = false;
-        this.visibilityTable = true; 
+        this.visibilityTable = true;
         alert('Usuário inserido com sucesso');
-        this.userService.GetAllUsers().subscribe((result2)=>{
-          this.users = result2
-        })
+        this.userService.GetAllUsers().subscribe((result2) => {
+          this.users = result2;
+        });
       });
     }
   }
 
-  GetAll(): void{
-    this.userService.GetAllUsers().subscribe((result) =>{
-      this.users = result
+  GetAll(): void {
+    this.userService.GetAllUsers().subscribe((result) => {
+      this.users = result;
     });
-  };
+  }
 
-  UpdateUser(id:number): void{
+  UpdateUser(id: number): void {
     this.visibilityTable = false;
     this.visibilityForm = true;
 
@@ -82,8 +89,7 @@ export class UserComponent implements OnInit{
     this.userService.GetUserById(id).subscribe((result) => {
       this.formTitle = `Atualizar  `;
 
-    console.log(result);
-
+      console.log(result);
 
       this.form = new FormGroup({
         id: new FormControl(result.id),
@@ -94,43 +100,41 @@ export class UserComponent implements OnInit{
         name: new FormControl(result.name),
         creationDate: new FormControl(result.creationDate),
         userCreationId: new FormControl(result.userCreationId),
+      });
     });
-  });
-}
+  }
 
-DeleteUser(id:number): void{
-  this.userService.DeleteUser(id).subscribe((result) => 
-  {
-    this.modalRef?.hide();
-    alert('Usuário deletado com sucesso');
-        this.userService.GetAllUsers().subscribe((result2)=>{
-          this.users = result2
-        })
+  DeleteUser(id: number): void {
+    this.userService.DeleteUser(id).subscribe((result) => {
+      this.modalRef?.hide();
+      alert('Usuário deletado com sucesso');
+      this.userService.GetAllUsers().subscribe((result2) => {
+        this.users = result2;
+      });
+    });
+  }
 
-  });
-};
-
-  ShowUserForm(): void{
+  ShowUserForm(): void {
     this.visibilityTable = false;
     this.visibilityForm = true;
 
-    this.formTitle = "Novo Usuário"
+    this.formTitle = 'Novo Usuário';
     this.form = new FormGroup({
       username: new FormControl(null),
       password: new FormControl(null),
       document: new FormControl(null),
       email: new FormControl(null),
-      name: new FormControl(null)
+      name: new FormControl(null),
     });
   }
 
-  ShowModal(id:number, name:string,conteudoModal: TemplateRef<any>):void{
+  ShowModal(id: number, name: string, conteudoModal: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(conteudoModal);
     this.userId = id;
-    this.nameUser = name
-}
+    this.nameUser = name;
+  }
 
-  Back():void{
+  Back(): void {
     this.visibilityTable = true;
     this.visibilityForm = false;
   }
@@ -158,8 +162,7 @@ DeleteUser(id:number): void{
   // }
 
   getUserData() {
-  this.userLogged = JSON.parse(localStorage.getItem('user_logged') || 'null');
-  this.isAuthenticated = this.userLogged !== null;
+    this.userLogged = JSON.parse(localStorage.getItem('user_logged') || 'null');
+    this.isAuthenticated = this.userLogged !== null;
   }
-
 }
