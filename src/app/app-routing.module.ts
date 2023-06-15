@@ -1,16 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './account/shared/auth.guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProductsComponent } from './components/products/products.component';
 
 const routes: Routes = [
   {
     path:'',
-    component: UserComponent,
+    component: DashboardComponent,
     children: [
-      {path: '',component: UserComponent},
-      {path: 'user',component: UserComponent}
+      {path: '',redirectTo:'dashboard',pathMatch:'full'},
+      {path: 'dashboard',component: DashboardComponent}
+    ],
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'',
+    component: ProductsComponent,
+    children: [
+      {path: '',redirectTo:'products',pathMatch:'full'},
+      {path: 'products',component: ProductsComponent}
     ],
     canActivate:[AuthGuard]
   },

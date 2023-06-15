@@ -37,15 +37,7 @@ export class UserComponent implements OnInit {
       password: new FormControl(null),
     });
 
-    const jsonString = localStorage.getItem('user_logged');
-
-    if (jsonString) {
-      const userData = JSON.parse(jsonString);
-
-      console.log(userData.user.name);
-      console.log(userData.user.username); 
-      console.log(userData.token); 
-    }
+    this.GetAll();
   }
 
   SendForm(): void {

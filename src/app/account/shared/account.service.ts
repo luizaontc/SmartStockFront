@@ -12,10 +12,8 @@ export class AccountService {
 
   getAuthorizationToken() {
     const cookie = window.localStorage.getItem('user_logged');
-
     if (cookie){
-      var convertToken = JSON.parse(token);
-
+      var convertToken = JSON.parse(cookie);
       var token = convertToken.token;
       return token;
     }else{
@@ -44,7 +42,6 @@ export class AccountService {
     if (date === null) {
       return false;
     }
-
     return !(date.valueOf() > new Date().valueOf());
   }
 
@@ -55,7 +52,6 @@ export class AccountService {
     } else if (this.isTokenExpired(token)) {
       return false;
     }
-
     return true;
   }
 }

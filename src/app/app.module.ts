@@ -10,12 +10,16 @@ import { ModalModule } from "ngx-bootstrap/modal";
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './http-interceptors';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ProductsComponent } from './components/products/products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

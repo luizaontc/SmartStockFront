@@ -1,0 +1,28 @@
+<div class="container p-5" >
+    <div class="border border-light rounded p-5">
+        <div>
+            <!-- <button type="button" class="btn btn-sm btn-outline-secondary" (click)="ShowUserForm()"> Novo Usuário</button> -->
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="GetAll()"> Atualizar</button>
+        </div>
+    
+
+    <hr/>
+
+    <table class="table table-striped table-hover table-sm" *ngIf="products">
+        <tr class="thead-light">
+            <th>Nome do Produto</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+        </tr>
+        <tr *ngFor="let product of products">
+            <td>{{product.productName}}</td>
+            <td>{{product.quantity}}</td>
+            <td>{{product.price}}</td>
+            <!-- <td>
+                <button type="button" class="btn btn-sm btn-outline-info" (click) = "UpdateUser(user.id)">Atualizar</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" (click) = "ShowModal(user.id,user.name,conteudoModal)">Excluir</button>
+            </td> -->
+        </tr>
+    </table>
+</div>
+</div>
