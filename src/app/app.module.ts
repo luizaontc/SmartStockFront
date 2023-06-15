@@ -12,6 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { httpInterceptorProviders } from './http-interceptors';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductsComponent } from './components/products/products.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ProductsComponent } from './components/products/products.component';
     UserComponent,
     LoginComponent,
     DashboardComponent,
-    ProductsComponent
+    ProductsComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,7 @@ import { ProductsComponent } from './components/products/products.component';
     HttpClientModule,
     ModalModule.forRoot()
   ],
-  providers: [HttpClientModule,UserService,AppRoutingModule,httpInterceptorProviders],
+  providers: [HttpClientModule,UserService,AppRoutingModule,httpInterceptorProviders,Location],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

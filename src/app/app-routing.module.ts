@@ -10,10 +10,11 @@ const routes: Routes = [
     path:'',
     component: DashboardComponent,
     children: [
-      {path: '',redirectTo:'dashboard',pathMatch:'full'},
+      // {path: '',redirectTo:'dashboard',pathMatch:'full'},
+      {path: '',component: DashboardComponent},
       {path: 'dashboard',component: DashboardComponent}
     ],
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard] 
   },
   {
     path:'',

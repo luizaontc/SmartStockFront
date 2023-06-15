@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,12 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'SmartStockFront';
   isLoginPage: boolean = false;
+
+  constructor(private router: Router) {    
+  }
+
+  Logout(){
+    localStorage.clear();
+    this.router.navigate(['login']);
+  }
 }

@@ -1,0 +1,9 @@
+<header *ngIf="!isLoginPage">
+    <nav>
+      <ul class="navbar-text">
+        <li><a routerLink="/dashboard"><strong>Dashboard</strong></a></li>
+        <li><a routerLink="/products"><strong>Produtos</strong></a></li>
+        <li><a (click)="Logout()"><strong>Deslogar</strong></a></li>
+      </ul>
+    </nav>
+  </header>

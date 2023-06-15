@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Models/User/User';
-import { LoginService } from 'src/app/Services/Login/login.service';
+import { LoginService } from 'src/app/Services/login/login.service';
 import { FormsModule } from '@angular/forms';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,9 @@ export class LoginComponent implements OnInit{
   formLogin: any;
   userLogin: any = 0;
   users: User[] = [];
-  isLoginPage : boolean = true;
+  isLoginPage = true;
 
-  constructor(private loginService : LoginService,private router: Router) {
+  constructor(private loginService : LoginService,private router: Router, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -41,7 +42,9 @@ export class LoginComponent implements OnInit{
     this.loginService.authenticate(this.userLogin).subscribe((data:any) => {
       if (data.user){
         localStorage.setItem('user_logged',JSON.stringify(data));
-        this.router.navigate(['dashboard']);
+        this.isLoginPage = false;
+        // this.router.navigate(['dashboard']);
+        window.location.href = '/dashboard';
       }else{
         alert('Usuário inválido.')
       }

@@ -7,13 +7,22 @@ import { OrderService } from 'src/app/Services/order/order.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit{
-  orders : Order[] = [];
+export class DashboardComponent implements OnInit {
+  orders: Order[] = [];
+  isLoginPage = true;
 
-  constructor(private orderService: OrderService) {}
+  constructor(private orderService: OrderService) {
+    this.isLoginPage = this.isLoginPage;
+  }
 
   ngOnInit(): void {
-    this.GetAll()
+    // Defina isLoginPage com base na lógica da página de login
+    // Por exemplo, você pode verificar se o usuário está autenticado
+    // e definir isLoginPage como false se estiver autenticado.
+    // Caso contrário, defina como true.
+    console.log(this.isLoginPage);
+
+    this.GetAll();
   }
 
   GetAll(): void {
@@ -21,4 +30,5 @@ export class DashboardComponent implements OnInit{
       this.orders = result;
     });
   }
+
 }
