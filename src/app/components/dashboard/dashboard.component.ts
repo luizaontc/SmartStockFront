@@ -16,18 +16,13 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Defina isLoginPage com base na lógica da página de login
-    // Por exemplo, você pode verificar se o usuário está autenticado
-    // e definir isLoginPage como false se estiver autenticado.
-    // Caso contrário, defina como true.
-    console.log(this.isLoginPage);
-
     this.GetAll();
   }
 
   GetAll(): void {
     this.orderService.GetAllOrders().subscribe((result: any) => {
       this.orders = result;
+      console.log(this.orders);
     });
   }
 
