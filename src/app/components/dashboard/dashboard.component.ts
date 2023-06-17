@@ -26,4 +26,10 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  GetOrderById(orderId: number){
+    this.orderService.GetOrderById(orderId).subscribe((result:any)=>{
+      console.log(result);
+    })
+  }
+
 }

@@ -21,4 +21,9 @@ export class OrderService {
     return this.http.get<Order[]>(environment.urlApi + '/order/');
   } 
 
+  GetOrderById(orderId:number): Observable<Order[]>{
+    const apiUrl = `${environment.urlApi}/order/${orderId}`
+    return this.http.get<Order[]>(apiUrl)
+  }
+
 }

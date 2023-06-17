@@ -1,3 +1,5 @@
+import { Product } from "../product/Product";
+
 export class OrderDetail {
     id: number;
     orderId: number;
@@ -5,6 +7,7 @@ export class OrderDetail {
     quantity: number;
     price: string;
     companyId: string;
+    product?: Product;
   
     constructor(
       id: number,
