@@ -16,6 +16,8 @@ export class Order {
   userModifiedId?: number;
   orderCompletioDate?: Date;
   userCompletionId?: number;
+  orderStatus?:string;
+  orderColor?:string;
 
   constructor(
     id: number,

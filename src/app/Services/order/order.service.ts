@@ -18,11 +18,16 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   GetAllOrders(): Observable<Order[]>{
-    return this.http.get<Order[]>(environment.urlApi + '/order/');
+    return this.http.get<Order[]>(environment.urlApi + '/api/order/');
   } 
 
   GetOrderById(orderId:number): Observable<Order[]>{
-    const apiUrl = `${environment.urlApi}/order/${orderId}`
+    const apiUrl = `${environment.urlApi}/api/order/${orderId}`
+    return this.http.get<Order[]>(apiUrl)
+  }
+
+  GetOrderDetailsById(orderId:number): Observable<Order[]>{
+    const apiUrl = `${environment.urlApi}/details/${orderId}`
     return this.http.get<Order[]>(apiUrl)
   }
 

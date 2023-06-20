@@ -9,6 +9,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   authenticate(data:any){
-    return this.http.post(environment.urlApi + '/user/authenticate',data);
+    return this.http.post(environment.urlApi + '/api/user/authenticate',data);
   }
 }
