@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/Models/order/Order';
 import { OrderDetail } from 'src/app/Models/order/OrderDetail';
 import { OrderService } from 'src/app/Services/order/order.service';
-import { FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,6 +37,13 @@ export class DashboardComponent implements OnInit {
         return accumulator + totalPrice;
       }, 0);
     });
+  }
+
+  CleanFilter(){
+    this.GetAll();
+    this.initialDate = '';
+    this.endDate = '';
+    this.visibilityTable=true;
   }
 
   BackToTable() {

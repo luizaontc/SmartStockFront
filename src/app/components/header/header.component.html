@@ -1,9 +1,13 @@
 <header *ngIf="!isLoginPage" class="col-12">
-    <nav>
-      <ul class="navbar-text">
+  <nav>
+    <div class="navbar-items">
+      <ul>
         <li><a routerLink="/dashboard"><strong>Dashboard</strong></a></li>
         <li><a routerLink="/products"><strong>Produtos</strong></a></li>
-        <li><a (click)="Logout()"><strong>Deslogar</strong></a></li>
       </ul>
-    </nav>
-  </header>
+    </div>
+    <ul class="navbar-text">
+      <li><a (click)="Logout()"><strong>Deslogar</strong></a></li>
+    </ul>
+  </nav>
+</header>
