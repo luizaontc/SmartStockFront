@@ -13,6 +13,7 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductsComponent } from './components/products/products.component';
 import { HeaderComponent } from './components/header/header.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     ModalModule.forRoot()

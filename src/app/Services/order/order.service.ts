@@ -31,4 +31,16 @@ export class OrderService {
     return this.http.get<Order[]>(apiUrl)
   }
 
+  GetOrderByDate(initialDateStr: string, endDateStr: string): Observable<Order[]> {
+    const data = {
+      initialDate: initialDateStr,
+      endDate: endDateStr
+    };
+
+    const requestBody = {
+      data: data
+    };
+    return this.http.post<Order[]>(environment.urlApi + '/api/order/date', data, httpOptions);
+  }
+
 }
