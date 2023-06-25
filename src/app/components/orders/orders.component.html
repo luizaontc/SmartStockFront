@@ -1,0 +1,70 @@
+<div class="container margintop p-5">
+    <div class="border rounded p-5 bcolor">
+        <div class="row">
+            <div class="col-12">
+                <form [formGroup]="formOrder" (ngSubmit)="CreateOrder()">
+                    <div class="row">
+                        <div class="col-6">
+                            <h1>Destinatário</h1>
+                            <div class="col-12">
+                                <label>Endereço: </label>
+                                <input type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="RecipientAddress">
+                            </div>
+                            <div class="col-12">
+                                <label>Complemento (opcional): </label>
+                                <input type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="RecipientComplement">
+                            </div>
+                            <div class="col-12">
+                                <label>Email (opcional): </label>
+                                <input type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="RecipientEmail">
+                            </div>
+                            <div class="col-12">
+                                <label>Telefone: </label>
+                                <input type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="RecipientPhoneNumber">
+                            </div>
+                            <br>
+                            <h1>Remetente</h1>
+                            <div class="col-12">
+                                <label>Endereço:</label>
+                                <input type="text"
+                                    class="form-control form-control-sm"
+                                    formControlName="RemetentAddress">
+                            </div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <input type="button"
+                                class="btn btn-outline-secondary"
+                                value="Adicionar novo produto"
+                                (click)="NewProduct()" />
+
+                                <div class="col-6 my-2 text-center mx-auto" *ngFor="let product of formOrder.get('Products').controls; let i = index">
+                                    <label>Produto {{ i + 1 }}</label>
+                                    <input type="text" [formControl]="product"  /><i class="far fa-trash-alt" (click)="RemoveProduct(i)"></i>
+                                  </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="pl-1">
+                                <br>
+                                <button type="submit"
+                                    class="btn btn-sm btn-outline-secondary btn-login">
+                                    Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

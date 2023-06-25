@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './account/shared/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ProductsComponent } from './components/products/products.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 const routes: Routes = [
   {
@@ -26,11 +27,20 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path:'',
+    component: OrdersComponent,
+    children: [
+      {path: '',redirectTo:'newOrder',pathMatch:'full'},
+      {path: 'newOrder',component: OrdersComponent}
+    ],
+    canActivate:[AuthGuard]
+  },
+  {
     path: '',
     component: LoginComponent, 
     children: [
       { path: 'login', component: LoginComponent }
-    ]
+    ],
   }  
 ];
 

@@ -17,8 +17,8 @@ export class DashboardComponent implements OnInit {
   visibilityTable: boolean = true;
   totalOrders?: number;
   sumOrders?: number;
-  initialDate?: string;
-  endDate?: string;
+  initialDate?: string | null;
+  endDate?: string | null;
 
   constructor(private orderService: OrderService) {
     this.isLoginPage = this.isLoginPage;
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   CleanFilter(){
     this.GetAll();
     this.initialDate = '';
-    this.endDate = '';
+    this.endDate = null;
     this.visibilityTable=true;
   }
 
@@ -50,12 +50,20 @@ export class DashboardComponent implements OnInit {
     this.visibilityTable = true;
   }
 
+  CreateOrder(){
+    console.log("chegou");
+    window.location.href = "/newOrder";
+  }
+
   FilterDates() {
     // Use this.initialDate e this.endDate para acessar os valores nos campos de entrada
-    if (this.initialDate == undefined || this.endDate == undefined || this.initialDate == null || this.endDate == null) {
+    if (this.initialDate == undefined || 
+        this.endDate == undefined || 
+        this.initialDate == null || 
+        this.endDate == null) {
       alert('Para filtrar é necessário colocar duas datas válidas.');
     } else if (this.endDate < this.initialDate) {
-      alert('Data final tem que ser menor que a inicial.');
+      alert('Data final tem que ser maior que a inicial.');
     } else {
       this.orderService
         .GetOrderByDate(this.initialDate, this.endDate)
@@ -75,7 +83,6 @@ export class DashboardComponent implements OnInit {
   GetOrderById(orderId: number) {
     this.orderService.GetOrderById(orderId).subscribe((result: any) => {
       console.log(result);
-      result.status = 1;
       switch (result.status) {
         case 1:
           result.orderStatus = 'Pedido Orçado';
@@ -95,7 +102,7 @@ export class DashboardComponent implements OnInit {
           break;
         default:
           result.orderStatus = 'Status não identificado';
-          result.orderColor = '#FF4500';
+          result.orderColor = 'FF4500';
           break;
       }
 

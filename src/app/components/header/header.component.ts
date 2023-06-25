@@ -13,7 +13,6 @@ export class HeaderComponent implements OnInit{
   constructor(private accountService: AccountService) {  }
 
   ngOnInit(): void {
-    console.log(this.isLoginPage);
     this.isLoginPage = !this.accountService.isUserLoggedIn();
   }
 
