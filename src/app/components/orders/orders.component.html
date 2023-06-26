@@ -41,15 +41,32 @@
                         </div>
                         <div class="col-6 text-center">
                             <input type="button"
-                                class="btn btn-outline-secondary"
-                                value="Adicionar novo produto"
-                                (click)="NewProduct()" />
-
-                                <div class="col-6 my-2 text-center mx-auto" *ngFor="let product of formOrder.get('Products').controls; let i = index">
-                                    <label>Produto {{ i + 1 }}</label>
-                                    <input type="text" [formControl]="product"  /><i class="far fa-trash-alt" (click)="RemoveProduct(i)"></i>
-                                  </div>
-                        </div>
+                              class="btn btn-outline-secondary"
+                              value="Adicionar novo produto"
+                              (click)="NewProduct()" />
+                            <div class="row" [formGroup]="formOrder">
+                              <table>
+                                <th width="60%">Produto</th>
+                                <th width="30%">Quantidade</th>
+                                <th width="10%"></th>
+                                <tbody formArrayName="Products">
+                                  <tr class="col-12 text-center p-5" *ngFor="let product of formOrder.get('Products').controls; let i = index"
+                                    [formGroupName]="i">
+                                    <td>
+                                      <input type="text" formControlName="productName" class="col-12" />
+                                    </td>
+                                    <td>
+                                      <input type="number" formControlName="quantity" class="col-6 mx-2" />
+                                    </td>
+                                    <td>
+                                      <i class="far fa-trash-alt mx-2" (click)="RemoveProduct(i)"></i>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                          
                     </div>
                     <br>
 
